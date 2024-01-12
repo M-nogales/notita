@@ -2,7 +2,7 @@
 <html>
 
 <head>
-
+@vite(['resources/js/app.js', 'resources/css/app.scss'])
 </head>
 
 <body>
