@@ -10,6 +10,17 @@
     @if (session('mensaje'))
         <div class="alert alert-success">{{ session('mensaje') }}</div>
     @endif
+    <button class="btn btn-primary d-inline-flex align-items-center mb-2" type="button">
+        Volver
+        <svg class="bi ms-1" width="20" height="20">
+            <use xlink:href="{{ route('notes.goBack') }}"></use>
+        </svg>
+    </button>
+    <!-- Hover added -->
+    <div class="list-group">
+        <a href="{{ route('notes.goBack') }}" class="list-group-item list-group-item-action active">volver</a>
+    </div>
+    
     <form action="{{ route('notes.update', $note->id) }}" method="POST">
         @method('PUT') {{-- Necesitamos cambiar al método PUT para editar --}}
         @csrf

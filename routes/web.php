@@ -25,3 +25,7 @@ Route::post('notes', [ NotesController::class, 'create' ]) -> name('notes.create
 Route::get('edit_note/{id}', [ NotesController::class, 'edit' ]) -> name('notes.edit'); 
 Route::put('edit_note/{id}', [ NotesController::class, 'update' ]) -> name('notes.update'); 
 Route::delete('delete_note/{id}', [ NotesController::class, 'delete' ]) -> name('notes.delete');
+// Route::get('notes', [ NotesController::class, 'goBack' ])-> name('notes.goBack');
+// Route::get('/', function () {
+//     return view('notes.notes');
+// })-> name('notes.goBack');

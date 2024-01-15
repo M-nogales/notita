@@ -7,53 +7,61 @@ use Illuminate\Http\Request;
 
 class NotesController extends Controller
 {
-    public function notes()
-    {
-        //$notes = Note::all(); // Nos saca todas las notas de la BBDD
-        $notes = Note::paginate(5);
-        return view('notes.notes', @compact('notes'));
-    }
+  public function notes()
+  {
+    //$notes = Note::all(); // Nos saca todas las notas de la BBDD
+    $notes = Note::paginate(5);
+    return view('notes.notes', @compact('notes'));
+  }
+  // public function goBack()
+  // {
+  //   return view('notes.notes');
+  // }
+  public function detail($id)
+  {
+    $note = Note::findOrFail($id);
+    return view('notes.detail', @compact('note'));
+  }
 
-    public function detail($id) {
-        $note = Note::findOrFail($id);
-        return view('notes.detail', @compact('note'));
-      }
+  public function create(Request $request)
+  {
 
-      public function create(Request $request) {
-   
-        $request -> validate([ 'title' => 'required', 'text' => 'required' ]);
-        $notaNueva = new Note;
-        $notaNueva -> title = $request -> title;
-        $notaNueva -> text = $request ->text;
-        $notaNueva -> save();
-        return back() -> with('mensaje', 'Nota agregada exitosamente');
-    }
-    
-    public function newNote(){
-        return view('notes.create');
-    }
+    $request->validate(['title' => 'required', 'text' => 'required']);
+    $notaNueva = new Note;
+    $notaNueva->title = $request->title;
+    $notaNueva->text = $request->text;
+    $notaNueva->save();
+    return back()->with('mensaje', 'Nota agregada exitosamente');
+  }
 
-    public function edit($id) {
-        $note = Note::findOrFail($id);
-        return view('notes.edit', compact('note'));
-      }
-      public function update(Request $request, $id) {
-        $request -> validate([
-            'title' => 'required',
-            'text' => 'required'
-        ]);
-        $notaActualizar = Note::findOrFail($id);
-        $notaActualizar -> title = $request -> title;
-        $notaActualizar -> text = $request -> text;
-        $notaActualizar -> save();
+  public function newNote()
+  {
+    return view('notes.create');
+  }
 
-        return back() -> with('mensaje', 'Nota actualizada');
-      }
-      
-      public function delete($id) {
-        $notaEliminar = Note::findOrFail($id);
-        $notaEliminar -> delete();
-        return back() -> with('mensaje', 'Nota Eliminada');
-      }
-      
+  public function edit($id)
+  {
+    $note = Note::findOrFail($id);
+    return view('notes.edit', compact('note'));
+  }
+  public function update(Request $request, $id)
+  {
+    $request->validate([
+      'title' => 'required',
+      'text' => 'required'
+    ]);
+    $notaActualizar = Note::findOrFail($id);
+    $notaActualizar->title = $request->title;
+    $notaActualizar->text = $request->text;
+    $notaActualizar->save();
+
+    return back()->with('mensaje', 'Nota actualizada');
+  }
+
+  public function delete($id)
+  {
+    $notaEliminar = Note::findOrFail($id);
+    $notaEliminar->delete();
+    return back()->with('mensaje', 'Nota Eliminada');
+  }
 }
