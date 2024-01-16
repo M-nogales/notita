@@ -25,3 +25,8 @@ Route::post('notes', [ NotesController::class, 'create' ]) -> name('notes.create
 Route::get('edit_note/{id}', [ NotesController::class, 'edit' ]) -> name('notes.edit'); 
 Route::put('edit_note/{id}', [ NotesController::class, 'update' ]) -> name('notes.update'); 
 Route::delete('delete_note/{id}', [ NotesController::class, 'delete' ]) -> name('notes.delete');
+
+//fortify
+Route::get('/home', function () {
+    return view('auth.dashboard');
+    })->middleware('auth');
