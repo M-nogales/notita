@@ -29,4 +29,4 @@ Route::delete('delete_note/{id}', [ NotesController::class, 'delete' ]) -> name(
 //fortify
 Route::get('/home', function () {
     return view('auth.dashboard');
-    })->middleware('auth');
+    })->middleware(['auth','verified']);
